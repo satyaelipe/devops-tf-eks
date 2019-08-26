@@ -2,8 +2,16 @@ variable "AWS_REGION" {}
 variable "AWS_ACCESS_KEY_ID" {}
 variable "AWS_SECRET_ACCESS_KEY" {}
 
+variable "KUBERNETES_VERSION" {
+  description = "Kubernetes version"
+  type        = string
+  default     = "1.13"
+}
+
 locals {
   env = "${terraform.workspace}"
+
+  public_subnets_only = true
 
   availabilityzone = "${var.AWS_REGION}a"
   availabilityzone2 = "${var.AWS_REGION}b"

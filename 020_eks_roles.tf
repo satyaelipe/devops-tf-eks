@@ -12,8 +12,8 @@
 
 
 resource "aws_iam_role" "EKSClusterRole" {
-  name = "EKSClusterRole-${local.env}",
-  description = "Allows EKS to manage clusters on your behalf.",
+  name = "EKSClusterRole-${local.env}"
+  description = "Allows EKS to manage clusters on your behalf."
   assume_role_policy = <<POLICY
 {
    "Version":"2012-10-17",

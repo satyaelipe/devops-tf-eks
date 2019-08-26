@@ -135,14 +135,14 @@ Note the Allocation ID for your newly created Elastic IP address; you enter this
 
 resource "aws_eip" "nat_eip" {
   vpc = true
-  tags {
+  tags = {
     Environment = "${local.env}"
   }
 }
 
 resource "aws_eip" "nat_eip_2" {
   vpc = true
-  tags {
+  tags = {
     Environment = "${local.env}"
   }
 }
@@ -261,7 +261,7 @@ resource "aws_subnet" "eks-private-2" {
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = "${aws_vpc.cluster.id}"
-  tags {
+  tags = {
     Environment = "${local.env}"
   }
 }
@@ -272,14 +272,14 @@ resource "aws_internet_gateway" "igw" {
 
 resource "aws_eip" "nat_eip" {
   vpc = true
-  tags {
+  tags = {
     Environment = "${local.env}"
   }
 }
 
 resource "aws_eip" "nat_eip_2" {
   vpc = true
-  tags {
+  tags = {
     Environment = "${local.env}"
   }
 }
@@ -290,7 +290,7 @@ resource "aws_nat_gateway" "nat_gateway" {
   allocation_id = "${aws_eip.nat_eip.id}"
   subnet_id = "${aws_subnet.eks-public.id}"
   depends_on = ["aws_internet_gateway.igw"]
-  tags {
+  tags = {
     Environment = "${local.env}"
   }
 }
@@ -299,7 +299,7 @@ resource "aws_nat_gateway" "nat_gateway_2" {
   allocation_id = "${aws_eip.nat_eip_2.id}"
   subnet_id = "${aws_subnet.eks-public-2.id}"
   depends_on = ["aws_internet_gateway.igw"]
-  tags {
+  tags = {
     Environment = "${local.env}"
   }
 
@@ -311,7 +311,7 @@ resource "aws_nat_gateway" "nat_gateway_2" {
 
 resource "aws_route_table" "private_route_table" {
   vpc_id = "${aws_vpc.cluster.id}"
-  tags {
+  tags = {
     Environment = "${local.env}"
     Name = "${local.env}-private-route-table"
   }
@@ -320,7 +320,7 @@ resource "aws_route_table" "private_route_table" {
 
 resource "aws_route_table" "private_route_table_2" {
   vpc_id = "${aws_vpc.cluster.id}"
-  tags {
+  tags = {
     Environment = "${local.env}"
     Name = "${local.env}-private-route-table-2"
   }
@@ -348,7 +348,7 @@ resource "aws_route_table" "eks-public" {
     gateway_id = "${aws_internet_gateway.igw.id}"
   }
 
-  tags {
+  tags = {
     Environment = "${local.env}"
     Name = "${local.env}-eks-public"
   }
@@ -364,7 +364,7 @@ resource "aws_route_table" "eks-public-2" {
     gateway_id = "${aws_internet_gateway.igw.id}"
   }
 
-  tags {
+  tags = {
     Environment = "${local.env}"
     Name = "${local.env}-eks-public-2"
   }
